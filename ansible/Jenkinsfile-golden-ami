@@ -1,0 +1,89 @@
+#!groovy
+
+def notify(String result, String previousResult) {
+    def notificationChannel = "#sopra-notifications"
+    def notifySuccess = false
+
+    if (result == "SUCCESS" && previousResult == "FAILURE") {
+        // The build is now fixed
+        slackSend(channel: notificationChannel,
+            color: "good",
+            message: ":aw_yeah: *${env.JOB_NAME}* build is now *FIXED!* ${env.BUILD_URL}"
+        )
+        emailext attachLog: true, body: '*${env.JOB_NAME}* build is now *FIXED!* ${env.BUILD_URL}', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:', to: 'madhup.saraswat@soprasteria.com'
+
+    } else  if (result == "SUCCESS") {
+        // The build is OK - We may want to omit this for some jobs
+        if (notifySuccess) {
+            slackSend(channel: notificationChannel,
+                color: "good",
+                message: ":aw_yeah: *${env.JOB_NAME}* build #$BUILD_NUMBER *SUCCEDED!* ${env.BUILD_URL}"
+            )
+            emailext attachLog: true, body: '*${env.JOB_NAME}* build #$BUILD_NUMBER *SUCCEDED!* ${env.BUILD_URL}', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:', to: 'madhup.saraswat@soprasteria.com'
+        }
+
+    } else {
+        // The build failed
+        slackSend(channel: notificationChannel,
+            color: "danger",
+            message: ":facepalmtomy: *${env.JOB_NAME}* build #$BUILD_NUMBER *FAILED!* ${env.BUILD_URL}"
+        )
+        emailext attachLog: true, body: 'Something is wrong with build #$BUILD_NUMBER ${env.BUILD_URL}', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:', to: 'madhup.saraswat@soprasteria.com'
+    }
+}
+
+node('master') {
+
+    try {
+
+        stage('Clean workspace before build') {
+            deleteDir()
+        }
+
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+        stage('Code checkout') {
+            checkout([$class: 'GitSCM',
+            branches: scm.branches,
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [],
+            gitTool: 'Default',
+            submoduleCfg: [],
+            userRemoteConfigs: [[credentialsId: 'Jenkins-git-credentials',
+            url: 'https://github.com/SopraSteria/repo_name']]]
+            )
+        }
+        }
+
+        stage('Bake AMI') {
+            dir('projects/golden_ami/ansible') {
+            sh '''
+            pwd
+            cd ../packer
+            packer validate packer.json
+            packer build packer.json
+            '''
+            }
+        }
+
+        stage("Create .properties") {
+            sh '''
+            cd projects/golden_ami/packer
+            echo -n "artifact_id=" >> bake-golden-ami.properties
+            cat packer-manifest.json | grep -o 'ami-[0-9a-z]*' | tail -1 >>  bake-golden-ami.properties
+            cat bake-golden-ami.properties
+            '''
+            archive includes: 'projects/golden_ami/packer/bake-golden-ami.properties'
+        }
+
+
+    } catch (e) {
+        currentBuild.result = "FAILURE"
+        throw e
+
+    } finally {
+        result = currentBuild.result ?: "SUCCESS"
+        previousResult = currentBuild.previousBuild?.result
+
+        notify(result, previousResult)
+    }
+}

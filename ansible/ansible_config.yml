@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: False
+  pre_tasks:
+  - name: Install python for Ansible
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  vars:
+    rack: "golden-ami"
+
+  roles:
+    - { role: base_apt, tags: ["base_apt"] }
+    - { role: patches_n_updates, tags: ["patches_n_updates"] }
+    - { role: cloudwatch_monitoring, tags: ["cloudwatch_monitoring"] }
+    - { role: log_rotation, tags: log_rotation }
+    - { role: email, tags: email }

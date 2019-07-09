@@ -1,0 +1,12 @@
+---
+
+- name: Mail sending using Ansible mail module
+  mail:
+    host: "smtp.gmail.com"
+    port: 587
+    username: "madhupcool@gmail.com"
+    password: "password"
+    to: "User <madhupsar@gmail.com>"
+    subject: "hey, its ansible"
+    body: "Iron Man is back"
+    secure: starttls

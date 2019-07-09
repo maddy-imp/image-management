@@ -1,0 +1,23 @@
+---
+
+- name: Upgrade all packages for Ubuntu exluding JAVA & HTTPD
+  apt: 
+    name: '*'
+    exclude: java*,httpd*
+    state: latest
+  when: ansible_distribution == "Ubuntu"  
+
+- name: Upgrade all packages for CentOS exluding JAVA & HTTPD
+  yum: 
+    name: '*'
+    exclude: java*,httpd*
+    state: latest
+  when: ansible_distribution == "CentOS" 
+  
+- name: install unattended-upgrades
+  apt:
+    pkg: unattended-upgrades
+    state: present
+
+- name: run unattended-upgrades
+  raw: sudo unattended-upgrades –d
