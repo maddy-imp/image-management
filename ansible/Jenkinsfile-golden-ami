@@ -23,24 +23,22 @@ node('master') {
         }
 
         stage('Bake AMI') {
-            dir('projects/golden_ami/ansible') {
             sh '''
             pwd
-            cd ../packer
+            cd packer
             packer validate packer.json
             packer build packer.json
             '''
-            }
         }
 
         stage("Create .properties") {
             sh '''
-            cd projects/golden_ami/packer
+            cd packer
             echo -n "artifact_id=" >> bake-golden-ami.properties
             cat packer-manifest.json | grep -o 'ami-[0-9a-z]*' | tail -1 >>  bake-golden-ami.properties
             cat bake-golden-ami.properties
             '''
-            archive includes: 'projects/golden_ami/packer/bake-golden-ami.properties'
+            archive includes: 'packer/bake-golden-ami.properties'
         }
 
     }
