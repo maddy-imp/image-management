@@ -26,7 +26,7 @@ node('master') {
             sh '''
             pwd
             cd packer
-            packer --version
+            sudo packer --version
             packer validate packer.json
             packer build packer.json
             '''
