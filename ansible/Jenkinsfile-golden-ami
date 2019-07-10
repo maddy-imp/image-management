@@ -57,7 +57,6 @@ node('master') {
         stage('Bake AMI') {
             dir('projects/golden_ami/ansible') {
             sh '''
-            export AWS_DEFAULT_REGION=us-east-1
             pwd
             cd ../packer
             packer validate packer.json
