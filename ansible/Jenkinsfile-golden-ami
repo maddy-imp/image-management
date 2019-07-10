@@ -52,7 +52,5 @@ node('master') {
     } finally {
         result = currentBuild.result ?: "SUCCESS"
         previousResult = currentBuild.previousBuild?.result
-
-        notify(result, previousResult)
     }
 }
