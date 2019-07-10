@@ -1,37 +1,5 @@
 #!groovy
 
-def notify(String result, String previousResult) {
-    def notificationChannel = "#sopra-notifications"
-    def notifySuccess = false
-
-    if (result == "SUCCESS" && previousResult == "FAILURE") {
-        // The build is now fixed
-        slackSend(channel: notificationChannel,
-            color: "good",
-            message: ":aw_yeah: *${env.JOB_NAME}* build is now *FIXED!* ${env.BUILD_URL}"
-        )
-        emailext attachLog: true, body: '*${env.JOB_NAME}* build is now *FIXED!* ${env.BUILD_URL}', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:', to: 'madhup.saraswat@soprasteria.com'
-
-    } else  if (result == "SUCCESS") {
-        // The build is OK - We may want to omit this for some jobs
-        if (notifySuccess) {
-            slackSend(channel: notificationChannel,
-                color: "good",
-                message: ":aw_yeah: *${env.JOB_NAME}* build #$BUILD_NUMBER *SUCCEDED!* ${env.BUILD_URL}"
-            )
-            emailext attachLog: true, body: '*${env.JOB_NAME}* build #$BUILD_NUMBER *SUCCEDED!* ${env.BUILD_URL}', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:', to: 'madhup.saraswat@soprasteria.com'
-        }
-
-    } else {
-        // The build failed
-        slackSend(channel: notificationChannel,
-            color: "danger",
-            message: ":facepalmtomy: *${env.JOB_NAME}* build #$BUILD_NUMBER *FAILED!* ${env.BUILD_URL}"
-        )
-        emailext attachLog: true, body: 'Something is wrong with build #$BUILD_NUMBER ${env.BUILD_URL}', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:', to: 'madhup.saraswat@soprasteria.com'
-    }
-}
-
 node('master') {
 
     try {
