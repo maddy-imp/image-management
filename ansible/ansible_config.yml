@@ -10,8 +10,5 @@
     rack: "golden-ami"
 
   roles:
-    - { role: base_apt, tags: ["base_apt"] }
     - { role: patches_n_updates, tags: ["patches_n_updates"] }
-    - { role: cloudwatch_monitoring, tags: ["cloudwatch_monitoring"] }
-    - { role: log_rotation, tags: log_rotation }
     - { role: email, tags: email }

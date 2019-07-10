@@ -41,6 +41,7 @@ node('master') {
         }
 
         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-packer', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
         stage('Code checkout') {
             checkout([$class: 'GitSCM',
             branches: scm.branches,
@@ -48,10 +49,9 @@ node('master') {
             extensions: [],
             gitTool: 'Default',
             submoduleCfg: [],
-            userRemoteConfigs: [[credentialsId: 'Jenkins-git-credentials',
-            url: 'https://github.com/SopraSteria/repo_name']]]
+            userRemoteConfigs: [[credentialsId: 'jenkins-github',
+            url: 'https://github.com/maddy-imp/image-management.git']]]
             )
-        }
         }
 
         stage('Bake AMI') {
@@ -75,7 +75,8 @@ node('master') {
             archive includes: 'projects/golden_ami/packer/bake-golden-ami.properties'
         }
 
-
+    }
+    }
     } catch (e) {
         currentBuild.result = "FAILURE"
         throw e
