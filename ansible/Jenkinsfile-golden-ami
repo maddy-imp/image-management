@@ -27,7 +27,6 @@ node('master') {
             pwd
             cd packer
             packer --version
-            packer validate packer.json
             packer build packer.json
             '''
         }
