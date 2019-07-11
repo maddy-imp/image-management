@@ -14,7 +14,9 @@
         "communicator": "ssh",
         "instance_type": "t2.micro",
         "region": "us-east-1",
+        "security_group_id": "sg-b8e4c2e3",
         "ssh_username": "ubuntu",
+        "subnet_id": "subnet-c85f08af",
         "tags": {
           "Name": "Golden AMI v{{user `version`}}"
          },
