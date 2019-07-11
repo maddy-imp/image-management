@@ -26,7 +26,6 @@ node('master') {
             sh '''
             pwd
             cd packer
-            packer --version
             echo "start testing"
             packer build packer.json
             echo "end testing"
