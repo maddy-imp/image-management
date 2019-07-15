@@ -2,7 +2,7 @@
 
 # Prevent python from being upgraded.
 - dpkg_selections:
-    name: java*,httpd*
+    name: java
     selection: hold
     
 - name: Upgrade all packages for Ubuntu
