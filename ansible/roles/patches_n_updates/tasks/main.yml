@@ -14,7 +14,6 @@
 - name: Upgrade all packages for CentOS exluding JAVA & HTTPD
   yum: 
     name: '*'
-    exclude: java*,httpd*
     state: latest
   when: ansible_distribution == "CentOS" 
   
