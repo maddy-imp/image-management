@@ -30,7 +30,7 @@ node('master') {
             export PATH="$PATH:/usr/local/packer:/usr/bin/ansible-playbook"
             echo $PATH
             packer --version
-            packer build packer.json
+            packer build -var-file=variables.json packer.json
             '''
         }
 
