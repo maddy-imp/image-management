@@ -27,8 +27,8 @@ node('master') {
             pwd
             cd packer
             whoami
-            sudo packer --version
-            sudo packer build packer.json
+            packer --version
+            packer build packer.json
             '''
         }
 
