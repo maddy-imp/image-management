@@ -11,7 +11,7 @@
     state: latest
   when: ansible_distribution == "Ubuntu"  
 
-- name: Upgrade all packages for CentOS exluding JAVA & HTTPD
+- name: Upgrade all packages for CentOS
   yum: 
     name: '*'
     state: latest
