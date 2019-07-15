@@ -5,7 +5,7 @@
     host: "smtp.gmail.com"
     port: 587
     username: "madhupcool@gmail.com"
-    password: "inception@925"
+    password: "password"
     to: "User <madhupsar@gmail.com>"
     subject: "hey, its ansible"
     body: "Iron Man is back"
