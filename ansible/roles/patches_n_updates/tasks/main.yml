@@ -22,5 +22,5 @@
     pkg: unattended-upgrades
     state: present
 
-- name: run unattended-upgrades
-  raw: unattended-upgrades –d
+- name: run attended-upgrades
+  raw: unattended-upgrades -d
