@@ -27,6 +27,7 @@ node('master') {
             pwd
             cd packer
             whoami
+            export PATH="/usr/local/packer"
             packer --version
             packer build packer.json
             '''
