@@ -1,6 +1,9 @@
 {
     "variables": {
-      "version": "1.0.1",
+      "version": "0.0.0",
+      "instance_type": "t2.micro",
+      "region": "us-east-1",
+      "source_ami": "ami-0cfee17793b08a293",
       "access_key": "{{ env `AWS_ACCESS_KEY_ID` }}",
       "secret_key": "{{ env `AWS_SECRET_ACCESS_KEY`}}"
     },
@@ -12,15 +15,13 @@
         "ami_name": "Golden AMI {{timestamp}}",
         "associate_public_ip_address": true,
         "communicator": "ssh",
-        "instance_type": "t2.micro",
-        "region": "us-east-1",
-        "security_group_id": "sg-b8e4c2e3",
+        "instance_type": "{{user `instance_type`}}",
+        "region": "{{user `region`}}",
         "ssh_username": "ubuntu",
-        "subnet_id": "subnet-c85f08af",
         "tags": {
           "Name": "Golden AMI v{{user `version`}}"
          },
-         "source_ami": "ami-0cfee17793b08a293"
+         "source_ami": "{{user `source_ami`}}"
     }],
   
     "provisioners": [
