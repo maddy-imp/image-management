@@ -27,7 +27,7 @@ node('master') {
             pwd
             cd packer
             whoami
-            export PATH="/usr/local/packer:/usr/bin/ansible"
+            export PATH="/usr/local/packer:/usr/bin/ansible-playbook"
             packer --version
             packer build packer.json
             '''
