@@ -9,7 +9,7 @@ node('master') {
         }
 
         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-packer', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
         stage('Code checkout') {
             checkout([$class: 'GitSCM',
             branches: scm.branches,
