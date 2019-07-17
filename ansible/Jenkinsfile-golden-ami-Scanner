@@ -1,0 +1,60 @@
+#!groovy
+
+node('master') {
+
+    try {
+
+        stage('Clean workspace before build') {
+            deleteDir()
+        }
+
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        stage('Code checkout') {
+            checkout([$class: 'GitSCM',
+            branches: scm.branches,
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [],
+            gitTool: 'Default',
+            submoduleCfg: [],
+            userRemoteConfigs: [[credentialsId: 'jenkins-github',
+            url: 'https://github.com/maddy-imp/image-management.git']]]
+            )
+        }
+
+        stage('Bake AMI') {
+            sh '''
+            pwd
+            cd packer-scanner
+            whoami
+            export PATH="$PATH:/usr/local/packer:/usr/bin/ansible-playbook"
+            echo $PATH
+            cd ../ansible
+            ansible-galaxy install -r requirements.yml
+            cd -
+            packer --version
+            packer build -var-file=variables.json packer.json
+            '''
+        }
+
+        stage("Create .properties") {
+            sh '''
+            cd packer-scanner
+            echo -n "artifact_id=" >> bake-goldenScanned-ami.properties
+            cat packer-manifest.json | grep -o 'ami-[0-9a-z]*' | tail -1 >>  bake-goldenScanned-ami.properties
+            cat bake-goldenScanned-ami.properties
+            '''
+            archive includes: 'packer-scanner/bake-goldenScanned-ami.properties'
+        }
+
+    }
+    }
+    } catch (e) {
+        currentBuild.result = "FAILURE"
+        throw e
+
+    } finally {
+        result = currentBuild.result ?: "SUCCESS"
+        previousResult = currentBuild.previousBuild?.result
+    }
+}
