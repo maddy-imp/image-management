@@ -1,0 +1,2 @@
+# Install a os hardening role from the Ansible Galaxy
+- src: dev-sec.os-hardening
