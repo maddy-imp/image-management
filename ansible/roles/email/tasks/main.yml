@@ -9,4 +9,5 @@
     to: "User <madhupsar@gmail.com>"
     subject: "hey, its ansible"
     body: "Iron Man is back"
+    attach: /home/ubuntu/report-linux-patch-baseline.html
     secure: starttls
