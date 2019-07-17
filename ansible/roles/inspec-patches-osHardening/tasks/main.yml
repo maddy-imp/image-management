@@ -6,7 +6,8 @@
 
 - name: Check patch installation on linux box
   command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html -la > report-linux-patch-baseline.html
-  check_mode: yes
+  register: command_result
+  ignore_errors: True
 
 - name: Check OS Hardening on linux box
   command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html -la > report-linux-oshardening-baseline.html
