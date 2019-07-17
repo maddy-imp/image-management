@@ -4,6 +4,10 @@
 - name: Install inspec 
   raw: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec 
 
+- name: Update repositories
+  apt:
+    update_cache: yes
+    
 - name: Install ansi2html
   apt:
     name: kbtin
