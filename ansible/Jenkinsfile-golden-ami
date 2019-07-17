@@ -29,7 +29,9 @@ node('master') {
             whoami
             export PATH="$PATH:/usr/local/packer:/usr/bin/ansible-playbook"
             echo $PATH
+            cd ../ansible
             ansible-galaxy install -r requirements.yml
+            cd -
             packer --version
             packer build -var-file=variables.json packer.json
             '''
