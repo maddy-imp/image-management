@@ -13,4 +13,5 @@
 
   roles:
     - { role: patches_n_updates, tags: ["patches_n_updates"] }
+    - { role: dev-sec.os-hardening, tags: ["dev-sec.os-hardening"] }
     #- { role: email, tags: email }
