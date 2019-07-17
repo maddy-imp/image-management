@@ -1,6 +1,16 @@
 ---
 
+# For RedHat, Ubuntu, and macOS
+- name: Install inspec 
+  raw: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
+- name: Update repositories
+  apt:
+    update_cache: yes
+    
+- name: Install ansi2html
+  apt:
+    name: kbtin
 
 - name: Check patch installation on linux box
   raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html -la > report-linux-patch-baseline.html
