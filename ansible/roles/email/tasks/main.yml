@@ -4,9 +4,9 @@
   mail:
     host: "smtp.gmail.com"
     port: 587
-    username: "madhupcool@gmail.com"
-    password: "password"
-    to: "User <madhupsar@gmail.com>"
+    username: "madhupinc@gmail.com"
+    password: "greenlove"
+    to: "User <madhupcool@gmail.com>"
     subject: "hey, its ansible"
     body: "Iron Man is back"
     attach: /home/ubuntu/report-linux-patch-baseline.html
