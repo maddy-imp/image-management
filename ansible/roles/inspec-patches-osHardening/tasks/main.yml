@@ -5,7 +5,7 @@
   raw: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec 
 
 - name: Check patch installation on linux box
-  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html -la > report-linux-patch-baseline.html
+  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html -la > report-linux-patch-baseline.html
   register: command_result
   ignore_errors: True
 
