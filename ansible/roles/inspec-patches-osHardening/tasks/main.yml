@@ -12,4 +12,4 @@
   check_mode: yes
 
 - name: Check OS Hardening on linux box
-  command: inspec exec https://github.com/dev-sec/linux-baseline
+  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline
