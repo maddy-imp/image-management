@@ -4,7 +4,10 @@
   gather_facts: True
   vars_files:
     - group_vars/vars.yml
-  #pre_tasks:
+  pre_tasks:
+  - name: Install ansible-galaxy roles
+    raw: ansible-galaxy install -r requirements.yml
+  
   #- name: Install python for Ansible
   #  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
