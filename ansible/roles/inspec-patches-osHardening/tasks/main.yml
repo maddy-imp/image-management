@@ -12,8 +12,6 @@
   raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html -la > report-linux-patch-baseline.html
   register: command_result
   ignore_errors: True
-  - debug:
-      var: command_result
 
 - name: Check OS Hardening on linux box
   command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html -la > report-linux-oshardening-baseline.html
