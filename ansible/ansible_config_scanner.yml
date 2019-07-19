@@ -13,4 +13,4 @@
 
   roles:
     - { role: inspec-patches-osHardening, tags: ["inspec-patches-osHardening"] }
-    - { role: email, tags: email }
+    #- { role: email, tags: email }
