@@ -18,6 +18,8 @@
         "instance_type": "{{user `instance_type`}}",
         "region": "{{user `region`}}",
         "ssh_username": "ubuntu",
+        "force_deregister": true,
+        "force_delete_snapshot": true 
         "tags": {
           "Name": "GoldenScanned AMI v{{user `version`}}"
          },
