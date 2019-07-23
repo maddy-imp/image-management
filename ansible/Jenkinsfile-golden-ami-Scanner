@@ -34,14 +34,14 @@ node('master') {
             cd -
             packer --version
             
-            // script to create multiple AMIs to scan from file
+
             input="ami.txt"
             while IFS= read -r line
             do
                 echo "$line"
             packer build -var-file=variables.json -var "source_ami=$line" packer.json
             done < "$input"
-            // End of script
+
             
             '''
         }
