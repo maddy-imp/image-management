@@ -33,7 +33,16 @@ node('master') {
             ansible-galaxy install -r requirements.yml
             cd -
             packer --version
-            packer build -var-file=variables.json -var-file=ami.json packer.json
+            
+            // script to create multiple AMIs to scan from file
+            input="ami.txt"
+            while IFS= read -r line
+            do
+                echo "$line"
+            packer build -var-file=variables.json -var "source_ami=$line" packer.json
+            done < "$input"
+            // End of script
+            
             '''
         }
 
