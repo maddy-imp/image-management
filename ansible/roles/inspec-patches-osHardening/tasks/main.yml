@@ -13,7 +13,7 @@
     name: kbtin
 
 - name: Check patch installation on linux box
-  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html -l > report-linux-patch-baseline.html
+  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html > report-linux-patch-baseline.html
   register: command_result
   ignore_errors: True
 
