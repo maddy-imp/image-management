@@ -18,5 +18,5 @@
   ignore_errors: True
 
 - name: Check OS Hardening on linux box
-  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html -la > report-linux-oshardening-baseline.html
+  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html > report-linux-oshardening-baseline.html
   ignore_errors: True
