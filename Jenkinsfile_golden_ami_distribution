@@ -1,0 +1,57 @@
+#!groovy
+
+node('master') {
+
+    try {
+
+        stage('Clean workspace before build') {
+            deleteDir()
+        }
+
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        stage('Code checkout') {
+            checkout([$class: 'GitSCM',
+            branches: scm.branches,
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [],
+            gitTool: 'Default',
+            submoduleCfg: [],
+            userRemoteConfigs: [[credentialsId: 'jenkins-github',
+            url: 'https://github.com/maddy-imp/image-management.git']]]
+            )
+        }
+
+        stage('Bake AMI') {
+            sh '''
+            pwd
+            cd packer-scanner
+            whoami
+            export PATH="$PATH:/usr/local/packer:/usr/bin/ansible-playbook"
+            echo $PATH
+            cd ../ansible
+            ansible-galaxy install -r requirements.yml
+            cd -
+            packer --version
+            
+            input="ami.txt"
+            while IFS= read -r line
+            do
+                echo "$line"
+            packer build -var-file=variables.json -var "source_ami=$line" packer.json
+            done < "$input"
+            
+            '''
+        }
+
+    }
+    }
+    } catch (e) {
+        currentBuild.result = "FAILURE"
+        throw e
+
+    } finally {
+        result = currentBuild.result ?: "SUCCESS"
+        previousResult = currentBuild.previousBuild?.result
+    }
+}
