@@ -19,4 +19,4 @@
 
 - name: Check OS Hardening on linux box
   command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html -la > report-linux-oshardening-baseline.html
-  check_mode: yes
+  ignore_errors: True
