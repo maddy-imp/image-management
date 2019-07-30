@@ -22,7 +22,7 @@ def Operation_Type_small
             )
         }
 
-        stage('Distribute AMI') {
+        stage('Decommission AMI') {
             sh '''
             pwd
             cd packer-scanner
