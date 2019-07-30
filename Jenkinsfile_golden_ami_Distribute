@@ -42,7 +42,7 @@ node('master') {
             echo "Snapshot_ID: $Snapshot_ID"
             echo "Account_ID: $Account_ID"
             echo "Region: $Region"
-            #echo "${Operation_Type,,}"
+            echo "Operation Type in small: ${Operation_Type,,}"
 
             for Account_ID_var in $(echo $Account_ID | sed "s/,/ /g")
             do
