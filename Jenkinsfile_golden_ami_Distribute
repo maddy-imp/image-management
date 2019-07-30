@@ -42,8 +42,7 @@ def Operation_Type_small
             echo "Snapshot_ID: $Snapshot_ID"
             echo "Account_ID: $Account_ID"
             echo "Region: $Region"
-            Operation_Type_small = "$Operation_Type"
-            echo "${Operation_Type_small,,}"
+            echo "$Operation_Type.toLowerCase()"
 
             for Account_ID_var in $(echo $Account_ID | sed "s/,/ /g")
             do
