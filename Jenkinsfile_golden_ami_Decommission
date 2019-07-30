@@ -1,0 +1,68 @@
+#!groovy
+
+node('master') {
+def Operation_Type_small
+    try {
+
+        stage('Clean workspace before build') {
+            deleteDir()
+        }
+
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        stage('Code checkout') {
+            checkout([$class: 'GitSCM',
+            branches: scm.branches,
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [],
+            gitTool: 'Default',
+            submoduleCfg: [],
+            userRemoteConfigs: [[credentialsId: 'jenkins-github',
+            url: 'https://github.com/maddy-imp/image-management.git']]]
+            )
+        }
+
+        stage('Distribute AMI') {
+            sh '''
+            pwd
+            cd packer-scanner
+            whoami
+            export PATH="$PATH:/usr/local/packer:/usr/bin/ansible-playbook"
+            echo $PATH
+            cd ../ansible
+            ansible-galaxy install -r requirements.yml
+            cd -
+            packer --version
+            
+            ## script for distributing AMI across accounts
+            set -x
+
+            echo "AMI_ID: $AMI_ID"
+            echo "Region: $Region"
+            
+            whoami
+            
+            for AMI_ID in $(echo $AMI_ID | sed "s/,/ /g")
+            do
+                ## grants launch permissions for the specified AMI to the specified AWS account
+            	  aws ec2 deregister-image --region $Region --image-id $AMI_ID
+                echo "$AMI_ID"
+            done
+            
+            echo "sweet!"
+            ## end of script
+            
+            '''
+        }
+
+    }
+    }
+    } catch (e) {
+        currentBuild.result = "FAILURE"
+        throw e
+
+    } finally {
+        result = currentBuild.result ?: "SUCCESS"
+        previousResult = currentBuild.previousBuild?.result
+    }
+}
