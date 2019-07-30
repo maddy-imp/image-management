@@ -59,7 +59,7 @@ def Operation_Type_small
             
             done
 
-            echo "sweet baby!"
+            echo "sweet!"
             ## end of script
             
             '''
