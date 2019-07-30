@@ -17,6 +17,7 @@
         "communicator": "ssh",
         "instance_type": "{{user `instance_type`}}",
         "region": "{{user `region`}}",
+        "ssh_username": "ubuntu",
         "skip_save_build_region": true,
         "tags": {
           "Name": "GoldenScanned AMI v{{user `version`}}"
