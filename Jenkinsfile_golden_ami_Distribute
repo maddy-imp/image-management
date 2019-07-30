@@ -22,7 +22,7 @@ node('master') {
             )
         }
 
-        stage('Bake AMI') {
+        stage('Distribute AMI') {
             sh '''
             pwd
             cd packer-scanner
@@ -34,7 +34,34 @@ node('master') {
             cd -
             packer --version
             
-            echo $AMI_ID
+            ## script for distributing AMI across accounts
+            set -x
+
+            echo "Operation Type: $Operation_Type"
+            echo "AMI_ID: $AMI_ID"
+            echo "Snapshot_ID: $Snapshot_ID"
+            echo "Account_ID: $Account_ID"
+            echo "Region: $Region"
+            echo "${Operation_Type,,}"
+
+            for Account_ID_var in $(echo $Account_ID | sed "s/,/ /g")
+            do
+                echo "$Account_ID_var"
+                
+            for AMI_ID_var in $(echo $AMI_ID | sed "s/,/ /g")
+            do
+                ## grants launch permissions for the specified AMI to the specified AWS account
+            	#aws ec2 modify-image-attribute --region $Region --image-id $AMI_ID --launch-permission "$Operation_Type=[{UserId=$Account_ID}]"
+            
+            	## grants create volume permission for a snapshot
+            	#aws ec2 modify-snapshot-attribute --region $Region --snapshot-id $Snapshot_ID --attribute createVolumePermission --operation-type ${Operation_Type,,} --user-ids $Account_ID
+                echo "$AMI_ID_var"
+            done
+            
+            done
+
+            echo "sweet baby!"
+            ## end of script
             
             '''
         }
