@@ -45,7 +45,7 @@ def Operation_Type_small
             for AMI_ID in $(echo $AMI_ID | sed "s/,/ /g")
             do
                 ## grants launch permissions for the specified AMI to the specified AWS account
-            	  aws ec2 deregister-image --region $Region --image-id $AMI_ID
+            	  #aws ec2 deregister-image --region $Region --image-id $AMI_ID
                 echo "$AMI_ID"
             done
             
