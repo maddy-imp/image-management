@@ -22,7 +22,7 @@ node('master') {
             )
         }
 
-        stage('Bake AMI') {
+        stage('Scanning AMI') {
             sh '''
             pwd
             cd packer-scanner
