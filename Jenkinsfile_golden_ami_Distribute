@@ -34,12 +34,7 @@ node('master') {
             cd -
             packer --version
             
-            input="ami.txt"
-            while IFS= read -r line
-            do
-                echo "$line"
-            packer build -var-file=variables.json -var "source_ami=$line" packer.json
-            done < "$input"
+            echo $AMI_ID
             
             '''
         }
