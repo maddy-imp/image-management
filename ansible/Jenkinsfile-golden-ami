@@ -35,9 +35,9 @@ node('master') {
             packer --version
             if [ "$Distribution" == "Windows" ] 
             then
-                packer build -var-file=variables.json -var source_ami=$Source_AMI_ID packer.json
-            else
                 packer build -var-file=variables.json -var source_ami=$Source_AMI_ID packer_win.json
+            else
+                packer build -var-file=variables.json -var source_ami=$Source_AMI_ID packer.json
             fi
             '''
         }
