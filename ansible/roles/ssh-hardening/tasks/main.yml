@@ -9,7 +9,7 @@
   notify: restart sshd
 
 - name: add and allow user and group
-  shell: echo -e "#add ccoe user to sudoer \nccoeind ALL=(ALL)       ALL" >> /etc/sudoers
+  raw: echo -e "#add ccoe user to sudoer \nccoeind ALL=(ALL)       ALL" >> /etc/sudoers
 
 - name: Ensure group "engineer" exists
   group:
