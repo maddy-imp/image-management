@@ -20,3 +20,13 @@
 - name: Check OS Hardening on linux box
   raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html > report-linux-oshardening-baseline.html
   ignore_errors: True
+
+- name: Check patch installation on Windows
+  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-patch-baseline | ansi2html > report-windows-patch-baseline.html
+  when: ansible_os_family == "Windows"
+  ignore_errors: True
+
+- name: Check OS Hardening on Windows
+  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-baseline | ansi2html > report-windows-oshardening-baseline.html
+  when: ansible_os_family == "Windows"
+  ignore_errors: True
