@@ -8,16 +8,16 @@
     validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -f %s'
   notify: restart sshd
 
-- name: add and allow user and group
-  shell: echo -e "#add ccoe user to sudoer \nccoeind ALL=(ALL)       ALL" >> /etc/sudoers
-
 - name: Ensure group "engineer" exists
   group:
     name: engineer
     state: present
-  ignore_errors: True
 
 - name: Add the user 'ccoeind' with a primary group of 'engineer'
   user:
     name: ccoeind
     group: engineer
+
+- name: add and allow user and group
+  shell: echo -e "#add ccoe user to sudoer \nccoeind ALL=(ALL)       ALL" >> /etc/sudoers
+
