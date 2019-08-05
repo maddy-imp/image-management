@@ -6,15 +6,7 @@
     owner: '{{ ssh_owner }}'
     group: '{{ ssh_group }}'
     validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -f %s'
-  notify: restart sshd
-
-- name: add and allow user and group
-  copy:
-    src: 'sudoers'
-    dest: '/etc/sudoers'
-    mode: '0220'
-    owner: '{{ ssh_owner }}'
-    group: '{{ ssh_group }}'
+  #notify: restart sshd
 
 - name: Ensure group "engineer" exists
   group:
@@ -25,3 +17,7 @@
   user:
     name: ccoeind
     group: engineer
+
+- name: add and allow user and group
+  shell: echo -e "#add ccoe user to sudoer \nccoeind ALL=(ALL)       ALL" >> /etc/sudoers
+
