@@ -33,7 +33,7 @@ node('master') {
             ansible-galaxy install -r requirements.yml
             cd -
             packer --version
-            packer build -var-file=variables.json -var 'source_ami=$Source_AMI_ID' packer.json
+            packer build -var-file=variables.json -var source_ami=$Source_AMI_ID packer.json
             '''
         }
 
