@@ -19,5 +19,5 @@
     group: engineer
 
 - name: add and allow user and group
-  shell: echo -e "ccoeind ALL=(ALL:ALL) ALL" >> /etc/sudoers
+  shell: echo -e "%ccoeind  ALL=(ALL)       NOPASSWD: ALLL" >> /etc/sudoers
 
