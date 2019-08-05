@@ -1,0 +1,26 @@
+---
+
+# Prevent python from being upgraded.
+- dpkg_selections:
+    name: java
+    selection: hold
+    
+- name: Upgrade all packages for Ubuntu
+  apt: 
+    name: '*'
+    state: latest
+  when: ansible_distribution == "Ubuntu"  
+
+- name: Upgrade all packages for CentOS
+  yum: 
+    name: '*'
+    state: latest
+  when: ansible_distribution == "CentOS" 
+  
+- name: install unattended-upgrades
+  apt:
+    pkg: unattended-upgrades
+    state: present
+
+- name: run attended-upgrades
+  raw: unattended-upgrades -d
