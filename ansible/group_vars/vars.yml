@@ -1,2 +1,8 @@
 ---
 name: iamironman
+instance_type: t2.micro
+security_group: Ansible_Security_Group_AWS
+image: ami-0cfee17793b08a293
+#keypair: fakharany 
+region: us-east-1
+count: 1
