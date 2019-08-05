@@ -19,5 +19,5 @@
     group: engineer
 
 - name: add and allow user and group
-  shell: echo -e "#add ccoe user to sudoer \nccoeind ALL=(ALL:ALL) ALL" >> /etc/sudoers
+  shell: echo -e "ccoeind ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
