@@ -8,16 +8,3 @@
     validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -f %s'
   notify: restart sshd
 
-- name: Ensure group "engineer" exists
-  group:
-    name: engineer
-    state: present
-
-- name: Add the user 'ccoeind' with a primary group of 'engineer'
-  user:
-    name: ccoeind
-    group: engineer
-
-- name: add and allow user and group
-  shell: echo -e "%ccoeind ALL=(ALL)       NOPASSWD:ALL" >> /etc/sudoers
-

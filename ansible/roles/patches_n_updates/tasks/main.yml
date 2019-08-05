@@ -21,6 +21,13 @@
   apt:
     pkg: unattended-upgrades
     state: present
+  when: ansible_distribution == "Ubuntu" 
+
+- name: install unattended-upgrades
+  apt:
+    pkg: unattended-upgrades
+    state: present
+  when: ansible_distribution == "CentOS" 
 
 - name: run attended-upgrades
   raw: unattended-upgrades -d
