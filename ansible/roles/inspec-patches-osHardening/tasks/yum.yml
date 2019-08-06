@@ -3,6 +3,7 @@
 - name: Update repositories
   yum:
     update_cache: yes
+  become: yes
 
 - name: Ensure ruby, lynis and ansi2html is installed using yum
   yum:
