@@ -34,7 +34,7 @@ node('master') {
             cd -
             packer --version
             
-            aws ec2 describe-images --filter Name=tag:hum,Values=tum --region us-east-1 | jq -r ".Images[].ImageId" > ami.txt
+            aws ec2 describe-images --filter Name=tag:Project,Values=Golden-AMI-To-Be-Scanned --region us-east-1 | jq -r ".Images[].ImageId" > ami.txt
 
             input="ami.txt"
             while IFS= read -r line

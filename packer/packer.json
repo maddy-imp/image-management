@@ -19,7 +19,8 @@
         "region": "{{user `region`}}",
         "ssh_username": "ubuntu",
         "tags": {
-          "Name": "Golden AMI v{{user `version`}}"
+          "Name": "Golden AMI v{{user `version`}}",
+          "Project": "Golden-AMI-To-Be-Scanned"
          },
          "source_ami": "{{user `source_ami`}}"
     }],
