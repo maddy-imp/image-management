@@ -8,7 +8,7 @@
   apt:
     pkg:
       - ruby
-      - ruby1.9.1-dev
+      - ruby-dev
       - build-essential
       - libffi-dev
       - make
