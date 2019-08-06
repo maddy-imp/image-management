@@ -1,6 +1,10 @@
 ---
 
-- name: Ensure ruby is installed
+- name: Update repositories
+  apt:
+    update_cache: yes
+
+- name: Ensure ruby and lynis is installed
   apt:
     name: "{{ item }}"
     state: present
@@ -9,15 +13,12 @@
   - ruby-dev
   - build-essential
   - libffi-dev
+  - lynis
 - name: Ensure inspec is installed
   gem:
     name: inspec
     state: present
     user_install: no
-
-- name: Update repositories
-  apt:
-    update_cache: yes
     
 - name: Install ansi2html
   apt:

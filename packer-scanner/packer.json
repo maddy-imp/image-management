@@ -27,12 +27,11 @@
   
     "provisioners": [
       {
-        "type": "inspec",
-        "profile": "https://github.com/dev-sec/linux-baseline",
-        "inspec_env_vars": [ "CHEF_LICENSE=accept-silent" ]
+        "type": "ansible",
+        "playbook_file": "../ansible/ansible_config_scanner.yml",
+        "user": "ubuntu"
       }
     ],
-
     "post-processors": [
     {
       "type": "manifest",
