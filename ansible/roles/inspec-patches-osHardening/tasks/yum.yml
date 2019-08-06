@@ -4,7 +4,7 @@
   yum:
     update_cache: yes
 
-- name: Ensure ruby, lynis and ansi2html is installed
+- name: Ensure ruby, lynis and ansi2html is installed using yum
   yum:
     pkg:
       - ruby

@@ -4,11 +4,11 @@
   apt:
     update_cache: yes
 
-- name: Ensure ruby, lynis and ansi2html is installed
+- name: Ensure ruby, lynis and ansi2html is installed using apt
   apt:
     pkg:
       - ruby
-      - ruby-dev
+      - ruby1.9.1-dev
       - build-essential
       - libffi-dev
       - lynis
