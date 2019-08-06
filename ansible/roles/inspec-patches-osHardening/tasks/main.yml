@@ -1,8 +1,19 @@
 ---
 
-# For RedHat, Ubuntu, and macOS
-- name: Install inspec 
-  raw: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+- name: Ensure ruby is installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - ruby
+  - ruby-dev
+  - build-essential
+  - libffi-dev
+- name: Ensure inspec is installed
+  gem:
+    name: inspec
+    state: present
+    user_install: no
 
 - name: Update repositories
   apt:
@@ -13,20 +24,19 @@
     name: kbtin
 
 - name: Check patch installation on linux box
-  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html > report-linux-patch-baseline.html
-  register: command_result
+  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html > report-linux-patch-baseline.html
   ignore_errors: True
 
 - name: Check OS Hardening on linux box
-  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html > report-linux-oshardening-baseline.html
+  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html > report-linux-oshardening-baseline.html
   ignore_errors: True
 
 - name: Check patch installation on Windows
-  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-patch-baseline | ansi2html > report-windows-patch-baseline.html
+  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-patch-baseline | ansi2html > report-windows-patch-baseline.html
   when: ansible_os_family == "Windows"
   ignore_errors: True
 
 - name: Check OS Hardening on Windows
-  raw: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-baseline | ansi2html > report-windows-oshardening-baseline.html
+  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-baseline | ansi2html > report-windows-oshardening-baseline.html
   when: ansible_os_family == "Windows"
   ignore_errors: True
