@@ -14,6 +14,7 @@
         "ami_description": "Golden AMI WIN v{{user `version`}}",
         "ami_name": "Golden AMI WIN {{timestamp}}",
         "associate_public_ip_address": true,
+        "user_data_file": "userdata.ps1",
         "communicator": "winrm",
         "instance_type": "{{user `instance_type`}}",
         "region": "{{user `region`}}",
