@@ -2,11 +2,6 @@
 
 - name: Lynis | Install Lynis (Debian | Ubuntu)
   include: apt.yml
-  when: ansible_os_family == 'Ubuntu'
-
-- name: Lynis | Install Lynis (CentOS | RHEL)
-  include: yum.yml
-  when: ansible_os_family == 'RedHat'
 
 - name: Ensure inspec is installed
   gem:
