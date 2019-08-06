@@ -9,26 +9,30 @@
   include: apt.yml
   when: ansible_distribution == "CentOS"
 
-- name: Ensure inspec is installed
-  gem:
-    name: inspec
-    state: present
-    user_install: no    
+- name: run lynis to audit system
+  command: lynis audit system -q
+    
 
-- name: Check patch installation on linux box
-  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html > report-linux-patch-baseline.html
-  ignore_errors: True
+#- name: Ensure inspec is installed
+#  gem:
+#    name: inspec
+#    state: present
+#    user_install: no    
 
-- name: Check OS Hardening on linux box
-  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html > report-linux-oshardening-baseline.html
-  ignore_errors: True
-
-- name: Check patch installation on Windows
-  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-patch-baseline | ansi2html > report-windows-patch-baseline.html
-  when: ansible_os_family == "Windows"
-  ignore_errors: True
-
-- name: Check OS Hardening on Windows
-  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-baseline | ansi2html > report-windows-oshardening-baseline.html
-  when: ansible_os_family == "Windows"
-  ignore_errors: True
+#- name: Check patch installation on linux box
+#  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-patch-baseline | ansi2html > report-linux-patch-baseline.html
+#  ignore_errors: True
+#
+#- name: Check OS Hardening on linux box
+#  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/linux-baseline | ansi2html > report-linux-oshardening-baseline.html
+#  ignore_errors: True
+#
+#- name: Check patch installation on Windows
+#  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-patch-baseline | ansi2html > report-windows-patch-baseline.html
+#  when: ansible_os_family == "Windows"
+#  ignore_errors: True
+#
+#- name: Check OS Hardening on Windows
+#  command: inspec exec --chef-license accept-silent https://github.com/dev-sec/windows-baseline | ansi2html > report-windows-oshardening-baseline.html
+#  when: ansible_os_family == "Windows"
+#  ignore_errors: True

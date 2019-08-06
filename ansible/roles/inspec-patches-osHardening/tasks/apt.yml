@@ -8,11 +8,6 @@
 - name: Ensure ruby, lynis and ansi2html is installed using apt
   apt:
     pkg:
-      - ruby 2.4
-      - ruby-dev
-      - build-essential
-      - libffi-dev
-      - make
       - lynis
       - kbtin
     state: present
