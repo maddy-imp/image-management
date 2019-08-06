@@ -5,7 +5,7 @@
     update_cache: yes
   become: yes
 
-- name: Ensure ruby, lynis and ansi2html is installed using apt
+- name: Ensure lynis and ansi2html is installed using apt
   apt:
     pkg:
       - lynis

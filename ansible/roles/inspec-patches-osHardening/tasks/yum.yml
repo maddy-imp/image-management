@@ -5,14 +5,9 @@
     update_cache: yes
   become: yes
 
-- name: Ensure ruby, lynis and ansi2html is installed using yum
+- name: Ensure lynis and ansi2html is installed using yum
   yum:
     pkg:
-      - ruby
-      - ruby-dev
-      - build-essential
-      - libffi-dev
-      - make
       - lynis
       - kbtin
     state: present
