@@ -3,7 +3,6 @@
 - name: Update repositories
   apt:
     update_cache: yes
-  sudo: yes
 
 - name: Ensure ruby, lynis and ansi2html is installed using apt
   apt:
