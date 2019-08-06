@@ -2,6 +2,11 @@
 
 - name: Lynis | Install Lynis (Debian | Ubuntu)
   include: apt.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Lynis | Install Lynis (Debian | Ubuntu)
+  include: apt.yml
+  when: ansible_distribution == "CentOS"
 
 - name: Ensure inspec is installed
   gem:
