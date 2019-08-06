@@ -1,0 +1,17 @@
+---
+
+- name: Update repositories
+  yum:
+    update_cache: yes
+
+- name: Ensure ruby, lynis and ansi2html is installed
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - ruby
+  - ruby-dev
+  - build-essential
+  - libffi-dev
+  - lynis
+  - kbtin

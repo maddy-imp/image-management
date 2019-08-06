@@ -1,0 +1,16 @@
+---
+
+- name: Update repositories
+  apt:
+    update_cache: yes
+
+- name: Ensure ruby, lynis and ansi2html is installed
+  apt:
+    pkg:
+      - ruby
+      - ruby-dev
+      - build-essential
+      - libffi-dev
+      - lynis
+      - kbtin
+    state: present
