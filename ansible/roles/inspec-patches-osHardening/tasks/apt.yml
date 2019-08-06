@@ -1,10 +1,5 @@
 ---
 
-- name: Update repositories
-  apt:
-    update_cache: yes
-  become: yes
-
 - name: Ensure lynis and ansi2html is installed using apt
   apt:
     pkg:
