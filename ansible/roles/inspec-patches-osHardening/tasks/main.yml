@@ -1,12 +1,21 @@
 ---
 
-- name: Lynis | Install Lynis (Debian | Ubuntu)
-  include: apt.yml
-  when: ansible_distribution == "Ubuntu"
+- name: Update repositories
+  apt:
+    update_cache: yes
+  sudo: yes
 
-- name: Lynis | Install Lynis (Debian | Ubuntu)
-  include: apt.yml
-  when: ansible_distribution == "CentOS"
+- name: Ensure ruby, lynis and ansi2html is installed using apt
+  apt:
+    pkg:
+      - ruby
+      - ruby-dev
+      - build-essential
+      - libffi-dev
+      - make
+      - lynis
+      - kbtin
+    state: present
 
 - name: Ensure inspec is installed
   gem:
