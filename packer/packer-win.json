@@ -33,6 +33,7 @@
         "user": "Administrator"
       }
     ],
+    
     "post-processors": [
     {
       "type": "manifest",

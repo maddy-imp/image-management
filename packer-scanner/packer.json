@@ -27,11 +27,11 @@
   
     "provisioners": [
       {
-        "type": "ansible",
-        "playbook_file": "../ansible/ansible_config_scanner.yml",
-        "user": "ubuntu"
+        "type": "inspec",
+        "profile": "https://github.com/dev-sec/linux-baseline"
       }
     ],
+
     "post-processors": [
     {
       "type": "manifest",
