@@ -2,6 +2,7 @@
 
 - name: Lynis | Install Lynis (Debian | Ubuntu)
   include: apt.yml
+  become: yes
   when: ansible_distribution == "Ubuntu"
 
 - name: Lynis | Install Lynis (Debian | Ubuntu)
