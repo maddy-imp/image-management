@@ -2,7 +2,7 @@
   copy:
     src: 'sshd_config'
     dest: '/etc/ssh/sshd_config'
-    mode: '0600'
+    mode: '0644'
     owner: '{{ ssh_owner }}'
     group: '{{ ssh_group }}'
     validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -f %s'
