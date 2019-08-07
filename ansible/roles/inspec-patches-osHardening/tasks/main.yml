@@ -14,7 +14,7 @@
     dest: '/etc/lynis/custom.prf'
 
 - name: run lynis to audit system
-  command: lynis audit system -Q | ansi2html > lynis_report.html
+  command: lynis audit system --profile /etc/lynis/custom.prf -Q | ansi2html > lynis_report.html
 
 - name: run rkhunter to audit filesystem
   command: rkhunter -c | ansi2html > rkhunter_report.html

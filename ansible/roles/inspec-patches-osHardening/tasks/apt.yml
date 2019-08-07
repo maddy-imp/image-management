@@ -11,4 +11,3 @@
       - kbtin
       - rkhunter
     state: present
-    install_recommends: no
