@@ -17,7 +17,7 @@
   raw: lynis audit system --profile /etc/lynis/custom.prf -Q | ansi2html > lynis_report.html
 
 - name: run rkhunter to audit filesystem
-  raw: rkhunter -c | ansi2html > rkhunter_report.html
+  raw: rkhunter -c --sk | ansi2html > rkhunter_report.html
     
 
 #- name: Ensure inspec is installed
