@@ -1,6 +1,6 @@
 ---
 
-- name: Update repositories
+- name: Update repositories using yum
   yum:
     update_cache: yes
 
