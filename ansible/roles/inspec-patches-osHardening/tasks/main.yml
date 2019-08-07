@@ -1,8 +1,12 @@
 ---
 
+- name: copy custom.prf file for lynis
+  copy:
+    src: 'custom.prf'
+    dest: '/etc/lynis/custom.prf'
+
 - name: Lynis | Install Lynis (Debian | Ubuntu)
   include: apt.yml
-  become: yes
   when: ansible_distribution == "Ubuntu"
 
 - name: Lynis | Install Lynis (CentOS | Redhat)

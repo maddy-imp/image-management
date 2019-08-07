@@ -1,0 +1,18 @@
+# Lines starting with "#" are comments
+# Skip a test (one per line)
+
+# This will ignore separation of partitions test
+skip-test=FILE-6310
+
+# Is Nginx installed?
+skip-test=HTTP-6622
+
+# Is Apache installed?
+skip-test=HTTP-6702
+
+# Skip checking print-related services
+#skip-test=PRNT-2307
+#skip-test=PRNT-2308
+
+# If a test id includes more than one test use this form to ignore a particular test
+skip-test=SSH-7408:tcpkeepalive
