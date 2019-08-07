@@ -40,7 +40,7 @@ node('master') {
             while IFS= read -r line
             do
                 echo "$line"
-            packer build -var-file=variables.json -var "source_ami=$line" packer.json
+            packer build -var-file=variables.json -var "source_ami=$line" packer-scanner.json
             done < "$input"
 
             
