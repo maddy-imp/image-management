@@ -5,12 +5,15 @@
   become: yes
   when: ansible_distribution == "Ubuntu"
 
-- name: Lynis | Install Lynis (Debian | Ubuntu)
+- name: Lynis | Install Lynis (CentOS | Redhat)
   include: yum.yml
   when: ansible_distribution == "CentOS"
 
 - name: run lynis to audit system
-  raw: lynis audit system -Q | ansi2html > lynis_report.html
+  command: lynis audit system -Q | ansi2html > lynis_report.html
+
+- name: run rkhunter to audit filesystem
+  command: rkhunter -c | ansi2html > rkhunter_report.html
     
 
 #- name: Ensure inspec is installed

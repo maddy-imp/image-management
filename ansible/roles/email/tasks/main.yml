@@ -10,5 +10,6 @@
     subject: "hey, its ansible"
     body: "Iron Man is back"
     attach: 
-    - /home/ubuntu/lynis_report.html 
+    - /home/ubuntu/lynis_report.html
+    - /home/ubuntu/rkhunter_report.html
     secure: starttls

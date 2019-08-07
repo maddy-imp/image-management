@@ -3,11 +3,12 @@
 - name: Update repositories
   yum:
     update_cache: yes
-  become: yes
 
 - name: Ensure lynis and ansi2html is installed using yum
   yum:
     pkg:
       - lynis
       - kbtin
+      - rkhunter
     state: present
+    install_recommends: no
