@@ -7,8 +7,8 @@
     username: "madhupinc@gmail.com"
     password: "ikummikrgfkdeqat"
     to: "User <madhupcool@gmail.com>"
-    subject: "hey, its ansible"
-    body: "Iron Man is back"
+    subject: "hey, Scanning completed"
+    body: "Hello - Scanning has been completed successfully and reports have been attached, please take a look."
     attach: 
     - /home/ubuntu/lynis_report.html
     - /home/ubuntu/rkhunter_report.html

@@ -25,7 +25,7 @@ node('master') {
         stage('Scanning AMI') {
             sh '''
             pwd
-            cd packer-scanner
+            cd packer
             whoami
             export PATH="$PATH:/usr/local/packer:/usr/bin/ansible-playbook"
             echo $PATH
@@ -45,16 +45,6 @@ node('master') {
 
             
             '''
-        }
-
-        stage("Create .properties") {
-            sh '''
-            cd packer-scanner
-            echo -n "artifact_id=" >> bake-goldenScanned-ami.properties
-            cat packer-manifest.json | grep -o 'ami-[0-9a-z]*' | tail -1 >>  bake-goldenScanned-ami.properties
-            cat bake-goldenScanned-ami.properties
-            '''
-            archive includes: 'packer-scanner/bake-goldenScanned-ami.properties'
         }
 
     }

@@ -4,13 +4,10 @@
   gather_facts: True
   vars_files:
     - group_vars/vars.yml
-  #pre_tasks:
-  #- name: Install python for Ansible
-  #  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
   vars:
-    rack: "goldenScanned-ami"
+    rack: "goldenScannedAMI"
 
   roles:
-    - { role: inspec-patches-osHardening, tags: ["inspec-patches-osHardening"] }
+    - { role: scanHardening, tags: ["scanHardening"] }
     - { role: email, tags: email }
