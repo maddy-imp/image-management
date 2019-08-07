@@ -1,4 +1,4 @@
-- name: create sshd_config and set permissions to root/600
+- name: create sshd_config and set permissions to root/644
   copy:
     src: 'sshd_config'
     dest: '/etc/ssh/sshd_config'

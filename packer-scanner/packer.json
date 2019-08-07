@@ -20,7 +20,8 @@
         "ssh_username": "ubuntu",
         "skip_save_build_region": true,
         "tags": {
-          "Name": "GoldenScanned AMI v{{user `version`}}"
+          "Name": "GoldenScanned AMI v{{user `version`}}",
+          "Project": "Golden-AMI-Is-Scanned"
          },
          "source_ami": "{{user `source_ami`}}"
     }],
