@@ -12,7 +12,7 @@
     #- { role: patchesUpdates, tags: ["patchesUpdates"], when: ansible_os_family != "Windows" }
     #- { role: dev-sec.os-hardening, tags: ["dev-sec.os-hardening"], when: ansible_os_family != "Windows" }
     #- { role: sshHardening, tags: ["sshHardening"], when: ansible_os_family != "Windows" }
-    - { role: win-patchesUpdates, tags: ["win-patchesUpdates"], when: ansible_os_family == "Windows" }
+    - { role: win-patchesUpdates, tags: ["win-patchesUpdates"] }
     #- { role: dev-sec.windows-hardening, tags: ["dev-sec.windows-hardening"], when: ansible_os_family == "Windows"}
 
 
