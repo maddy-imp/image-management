@@ -31,6 +31,7 @@
       {
         "type": "ansible",
         "playbook_file": "../ansible/ansible_config.yml",
+        "environment_vars": ["WINRMPASS={{.WinRMPassword}}"],
         "user": "Administrator"
       }
     ],
