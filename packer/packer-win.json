@@ -30,7 +30,7 @@
     "provisioners": [
       {
         "type": "shell-local",
-        "command": "ansible-playbook -vvvv -i '127.0.0.1,' -c winrm -T 300 -e \"ansible_user=vagrant ansible_password=vagrant ansible_port=2222 ansible_winrm_scheme=http\" ./ansible/ansible_config.yml"
+        "command": "ansible-playbook -vvvv -i '127.0.0.1,' -c winrm -T 300 -e \"ansible_user=vagrant ansible_password=vagrant ansible_port=2222 ansible_winrm_scheme=http\" ../ansible/ansible_config.yml"
     }
     ],
     
