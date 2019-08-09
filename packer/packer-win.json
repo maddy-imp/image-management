@@ -29,9 +29,13 @@
   
     "provisioners": [
       {
-        "type": "shell-local",
-        "command": "ansible-playbook -vvvv -i '127.0.0.1,' -c winrm -T 300 -e \"ansible_user=vagrant ansible_password=vagrant ansible_port=2222 ansible_winrm_scheme=http\" ../ansible/ansible_config.yml"
-    }
+        "type": "ansible",
+        "playbook_file": "../ansible/ansible_config.yml",
+        "extra_arguments": [
+          "--connection", "packer", "-vvv",
+          "--extra-vars", "ansible_user=Administrator ansible_connection=winrm ansible_ssh_port=5986 ansible_winrm_server_cert_validation=ignore ansible_shell_type=powershell ansible_shell_executable=None"
+        ]
+      }
     ],
     
     "post-processors": [
