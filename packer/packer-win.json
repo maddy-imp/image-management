@@ -29,6 +29,14 @@
   
     "provisioners": [
       {
+      "type": "powershell",
+      "scripts": [
+          "winrm-setup.ps1"
+      ],
+      "environment_vars": "WINRMPASS={{.WinRMPassword}}"
+      },
+
+      {
         "type": "ansible",
         "playbook_file": "../ansible/ansible_config.yml",
         "extra_arguments": [
