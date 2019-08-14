@@ -20,7 +20,7 @@
         "instance_type": "{{user `instance_type`}}",
         "region": "{{user `region`}}",
         "winrm_username": "Administrator",
-        "winrm_use_ssl": false,
+        "winrm_use_ssl": true,
         "winrm_insecure": true,
         "tags": {
           "Name": "Golden AMI WIN v{{user `version`}}"
